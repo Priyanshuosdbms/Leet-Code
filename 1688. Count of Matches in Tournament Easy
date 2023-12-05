@@ -1,0 +1,33 @@
+/*
+class Solution {
+    public int numberOfMatches(int n) {
+        // Rules : 
+        // 1. even -> n/2 mtchs & n/2 proceed
+        // 2. odd -> (n-1)/2 mtchs & (n-1)/2 + 1 proceed
+        // Total number of matches
+        int ans = 0;
+        while(n > 1)
+        {
+            if(n % 2 == 0)
+            {
+                ans += n/2;
+                n = n/2;
+            }
+
+            else
+            {
+                ans += (n-1)/2+1;
+                n = (n-1)/2;
+            }
+
+        } 
+
+        return ans;
+    }
+}
+*/
+class Solution {
+    public int numberOfMatches(int n) {
+        return n-1;
+    }
+}
