@@ -1,0 +1,38 @@
+/*
+class Solution {
+    public int findJudge(int n, int[][] trust) {
+        int[] count = new int[n + 1];
+
+        for (int[] t : trust) {
+            --count[t[0]];
+            ++count[t[1]];
+        }
+
+        for (int i = 1; i < n + 1; ++i)
+            if (count[i] == n - 1)
+                return i;
+
+        return -1;
+    }
+}
+*/
+class Solution {
+    public int findJudge(int n, int[][] trust) {
+        int [] ppl = new int[n];
+        boolean [] personHasLinks = new boolean[n];
+        for (int i = 0; i < trust.length; i++) {
+            ppl[trust[i][1] - 1] += 1;
+            personHasLinks[trust[i][0] - 1] = true;
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (ppl[i] == n - 1 && !personHasLinks[i]) {
+                System.gc();
+                return i + 1;
+            }
+        }
+
+        System.gc();
+        return - 1;
+    }
+}
