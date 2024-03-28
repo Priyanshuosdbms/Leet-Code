@@ -1,0 +1,59 @@
+/*
+class Solution {
+
+    public int maxSubarrayLength(int[] nums, int k) {
+        int ans = 0;
+        Map<Integer, Integer> count = new HashMap<>();
+
+        for (int l = 0, r = 0; r < nums.length; ++r) {
+            count.merge(nums[r], 1, Integer::sum);
+            //This is a lambda expression representing the merge function. It specifies how to combine the current value associated with the key (if present) and the new value (1 in this case). In this case, it's using the Integer::sum method reference, which means it will add the current value and the new value.
+
+            while (count.get(nums[r]) == k + 1) {
+                count.merge(nums[l++], -1, Integer::sum);
+            }
+
+            ans = Math.max(ans, r - l + 1);
+        }
+
+        return ans;
+    }
+}
+*/
+class Solution {
+    public int maxSubarrayLength(int[] nums, int k) {
+        if(nums.length==1)
+        {
+            return 1;
+        }
+        Map<Integer,Integer> nm=new HashMap<>();
+        int ans=0,maxi=0;
+        for(int i=0,j=0;i<nums.length;i++)
+        {
+            nm.put(nums[i], nm.getOrDefault(nums[i],0)+1);
+            maxi=Math.max(maxi,nm.get(nums[i]));
+            if(maxi>k)
+            {
+                while(maxi>k)
+                {
+                    if(nm.get(nums[j])==1)
+                    {
+                        nm.remove(nums[j]);
+                        
+                    }
+                    else
+                    {
+                        nm.put(nums[j], nm.getOrDefault(nums[j],0)-1);
+                    }
+                    j++;
+                    maxi=nm.get(nums[i]);
+                }
+            }
+            else
+            {
+                ans=Math.max(ans,i-j+1);
+            }
+        }
+        return ans;
+    }
+}
