@@ -1,0 +1,34 @@
+/*
+class Solution {
+  public boolean isIsomorphic(String s, String t) {
+    Map<Character, Integer> charToIndex_s = new HashMap<>();
+    Map<Character, Integer> charToIndex_t = new HashMap<>();
+
+    for (Integer i = 0; i < s.length(); ++i)
+      if (charToIndex_s.put(s.charAt(i), i) != charToIndex_t.put(t.charAt(i), i))
+        return false;
+
+    return true;
+  }
+}
+*/
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] a = new int[256];
+        for (int i = 0; i < s.length(); i++) {
+            char ch1 = s.charAt(i);
+            char ch2 = t.charAt(i);
+            if (a[ch1] == 0) {
+                for (int j = 0; j < 256; j++) {
+                    if (a[j] == ch2)
+                        return false;
+                }
+                a[ch1] = ch2;
+            } else if (a[ch1] != ch2)
+                return false;
+
+        }
+        return true;
+
+    }
+}
