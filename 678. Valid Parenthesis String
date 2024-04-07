@@ -1,0 +1,65 @@
+/*
+class Solution {
+    public boolean checkValidString(String s) {
+        // valid string characteristics:
+        // 1. ( => )
+        // 2. ) => (
+        // 3. ( -> before, ) -> after
+        // 4. * can be (, ), E;
+
+        int n = s.length();
+        boolean ans = false;
+        for(int i=0 ; i<n/2 ; i++)
+        {
+            if(s.charAt(i) == '(' && s.charAt(n-i-1) == ')')
+            {
+                ans = true;
+            }
+
+            else if(s.charAt(i) == '*' && s.charAt(n-i-1) == ')' || s.charAt(n-i-1) == '(')
+            {
+                ans = true;
+            }
+
+            else
+            {
+                ans = false;
+                break;
+            }
+        }
+
+        return ans;
+    }
+}
+*/
+
+class Solution {
+    public boolean checkValidString(String s) {
+        int n = s.length();
+        int openCount = 0;
+        int closeCount = 0;
+
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+
+            if (c == '(' || c == '*') {
+                openCount++;
+            } else {
+                openCount--;
+            }
+
+            if (s.charAt(n - i - 1) == ')' || s.charAt(n - i - 1) == '*') {
+                closeCount++;
+            } else {
+                closeCount--;
+            }
+
+            if (openCount < 0 || closeCount < 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
