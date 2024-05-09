@@ -1,0 +1,11 @@
+class Solution {
+    public long maximumHappinessSum(int[] happy, int k) {
+        Arrays.sort(happy);
+        long res = 0;
+        int n = happy.length;
+        for (int i = n-1; i >= n-k; i--) {
+            res += Math.max(0, happy[i] - (n-i-1));
+        }
+        return res;
+    }
+}
